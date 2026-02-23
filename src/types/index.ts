@@ -30,8 +30,6 @@ export interface IOrder extends IBuyer{
     items: string[]; // Массив ID выбранных товаров (строковые идентификаторы)
 }
 
-export type IOrderData = IOrder;
-
 // Ответ сервера при запросе списка товаров
 export interface IProductListResponse {
     total: number;

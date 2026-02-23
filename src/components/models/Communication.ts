@@ -1,5 +1,5 @@
 
-import { IApi, IProductListResponse, IOrderResult, IProduct, IOrder } from '../../../types';
+import { IApi, IProductListResponse, IOrderResult, IProduct, IOrder } from '../../types';
 
 export class Communication {
 
@@ -11,12 +11,7 @@ export class Communication {
 
 
   async getProducts(): Promise<IProduct[]> {
-    return this.api.get<IProductListResponse>('/product').then((data) =>
-      data.items.map((item) => ({
-        ...item
-
-      }))
-    );
+    return this.api.get<IProductListResponse>('/product').then((data) => data.items);
   }
 
   // Отправка заказа

@@ -1,9 +1,9 @@
 import './scss/styles.scss';
 import { apiProducts } from './utils/data';   // данные из стартера
-import { Catalog } from './components/base/models/Catalog.ts';
-import { Communication } from './components/base/models/Communication.ts';
-import { Basket } from './components/base/models/Basket.ts';
-import { Buyer } from './components/base/models/Buyer.ts';
+import { Catalog } from './components/models/Catalog.ts';
+import { Communication } from './components/models/Communication.ts';
+import { Basket } from './components/models/Basket.ts';
+import { Buyer } from './components/models/Buyer.ts';
 import { Api } from './components/base/Api.ts';
 import { API_URL } from './utils/constants';
 
@@ -60,6 +60,7 @@ const api = new Api(API_URL);
 const messageService = new Communication(api);
 
 console.log(`***********************************`)
+async function init() {
 const products = await messageService.getProducts();
 if (products) {
     console.log('каталог товаров с сервера:', products);
@@ -70,28 +71,8 @@ else {
 
 // тест Catalog сервер
 console.log(`******`)
-catalogModel.setItems(products);
+catalogModel.setItems(products); // Сохранение массива товаров
 console.log(`Получение всех товаров каталога (сервер):`, catalogModel.getItems())
-console.log(`Получение одного товара по id (сервер):`, catalogModel.getItemById(products[5].id))
-catalogModel.setPreview(products[5]);
-console.log(`Сохранение товара для подробного отображения (сервер): `, catalogModel.getPreview())
+}
 
-// тест Basket сервер
-console.log(`******`);
-console.log(`тест Basket сервер`);
-// добавление товара полученного с сервера в корзину
-basketModel.addItemBasket(products[0])
-basketModel.addItemBasket(products[1])
-console.log(`массив товаров корзины (полученных с сервера):`, basketModel.getItemsBasket())
-console.log(`количесво товаров в корзине: `, basketModel.getCount())
-console.log(`стоимость корзины: `, basketModel.getTotalPrice())
-console.log(`проверка наличия товара по id (товар есть в корзине): `, basketModel.hasItemBasket(apiProducts.items[0].id))
-console.log(`проверка наличия товара по id (товар отсутствует в корзине): `, basketModel.hasItemBasket(apiProducts.items[3].id))
-// удаление товара по id
-basketModel.removeItemBasket((products[0].id))
-console.log(`получение массива товаров после удаления: `, basketModel.getItemsBasket())
-// очистка корзины
-basketModel.clearBasket()
-console.log(`получение массива товаров после очистки: `, basketModel.getItemsBasket())
-
-
+init().catch(console.error); 
