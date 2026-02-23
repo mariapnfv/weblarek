@@ -8,22 +8,22 @@ export interface IApi {
 //Интерфейс данных товаров
 
 export interface IProduct {
-id: string; // Уникальный идентификатор товара
-title: string; // Название товара
-image: string; // URL изображения товара
-description: string; // Описание товара
-category: string; // Категория товара
-price: number | null; // Цена товара, null – бесценный
+    id: string; // Уникальный идентификатор товара
+    title: string; // Название товара
+    image: string; // URL изображения товара
+    description: string; // Описание товара
+    category: string; // Категория товара
+    price: number | null; // Цена товара, null – бесценный
 }
 
 //Интерфейс данных покупателя
 
 export type TPayment = 'card' | 'cash' | '';
 export interface IBuyer {
-  payment: TPayment; // Способ оплаты
-  address: string; // Адрес доставки
-  email: string; // Электронная почта
-  phone: string; // Телефон 
+    payment: TPayment; // Способ оплаты
+    address: string; // Адрес доставки
+    email: string; // Электронная почта
+    phone: string; // Телефон 
 }
 
 export interface IOrder {

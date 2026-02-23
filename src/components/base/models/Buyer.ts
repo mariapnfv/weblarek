@@ -1,9 +1,9 @@
-import { IBuyer } from '../../../types'; 
+import { IBuyer } from '../../../types';
 
 type FormErrors = Partial<Record<keyof IBuyer, string>>;
 
 export class Buyer {
-protected  dataBuyer: IBuyer =  {
+    protected dataBuyer: IBuyer = {
         payment: '',
         address: '',
         phone: '',
@@ -14,11 +14,11 @@ protected  dataBuyer: IBuyer =  {
         this.dataBuyer = { ...this.dataBuyer, ...data };
     }
     //получение всех данных покупателя
-        getData(): IBuyer {
+    getData(): IBuyer {
         return { ...this.dataBuyer };
     }
     //очистка данных покупателя
-     clearData(): void {
+    clearData(): void {
         this.dataBuyer = {
             payment: '',
             address: '',
@@ -52,4 +52,4 @@ protected  dataBuyer: IBuyer =  {
 
 
 
-  }
+}

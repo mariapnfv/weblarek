@@ -1,10 +1,10 @@
-import { IProduct } from '../../../types'; 
+import { IProduct } from '../../../types';
 
 export class Catalog {
     protected items: IProduct[] = [];
     protected selectedItem: IProduct | null = null;
 
-            constructor() {
+    constructor() {
         this.items = [];
     }
 
