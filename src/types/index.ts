@@ -25,11 +25,7 @@ export interface IBuyer {
 }
 
 //Интерфейс данных заказа
-export interface IOrder {
-    payment: TPayment; // Способ оплаты 
-    address: string; // Адрес доставки
-    email: string; // Электронная почта покупателя
-    phone: string; // Телефон покупателя
+export interface IOrder extends IBuyer{
     total: number; // Финальная сумма заказа
     items: string[]; // Массив ID выбранных товаров (строковые идентификаторы)
 }

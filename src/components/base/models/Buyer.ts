@@ -9,6 +9,7 @@ export class Buyer {
         phone: '',
         email: ''
     }
+    
     //сохранение данных в модели
     setData(data: Partial<IBuyer>): void {
         this.dataBuyer = { ...this.dataBuyer, ...data };

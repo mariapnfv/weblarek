@@ -112,7 +112,7 @@ Presenter - презентер содержит основную логику п
 
 interface IProduct {  
  id: string; — Уникальный идентификатор товара
- title: string; — Название товара  
+title: string; — Название товара  
  image: string; — URL изображения товара  
  description: string; — Описание товара  
  category: string; — Категория товара  
@@ -155,6 +155,10 @@ class Basket
 
 поля класса  
 itemsBasket: IProduct[]
+
+constructor() {
+this.itemsBasket = [];
+}
 
 методы
 
