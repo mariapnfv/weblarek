@@ -122,10 +122,10 @@ interface IProduct {
 Интерфейс данных покупателя
 
 interface IBuyer {  
-payment: TPayment; // Способ оплаты  
-address: string; // Адрес доставки  
-email: string; // Электронная почта  
-phone: string; // Телефон  
+payment: TPayment; — Способ оплаты  
+address: string; — Адрес доставки  
+email: string; — Электронная почта  
+phone: string; — Телефон  
 }
 
 ###### Модели данных
@@ -143,11 +143,11 @@ items: IProduct[]
 selectedItem: IProduct | null
 
 методы  
-setItems(items: IProduct[]): void //сохранение массива товаров  
-getItems(): IProduct[] //получение массива товаров  
-getItemById(id: string): IProduct | undefined //получение одного товара по его id  
-setPreview(item: IProduct): void //сохранение товара для подробного отображения  
-setPreview(): IProduct | null //получение товара для подробного отображения
+setItems(items: IProduct[]): void — сохранение массива товаров  
+getItems(): IProduct[] — получение массива товаров  
+getItemById(id: string): IProduct | undefined — получение одного товара по его id  
+setPreview(item: IProduct): void — сохранение товара для подробного отображения  
+setPreview(): IProduct | null — получение товара для подробного отображения
 
 Класс корзина Basket  
 хранение товаров, которые пользователь выбрал для покупки  
@@ -158,13 +158,13 @@ itemsBasket: IProduct[]
 
 методы
 
-getItemsBasket(): IProduct[] //получение массива товаров, которые находятся в корзине;  
-addItemBasket(item: IProduct): void //добавление товара, который был получен в параметре, в массив корзины;  
-removeItemBasket(itemToRemove: IProduct): void //удаление товара, полученного в параметре из массива корзины;  
-clearBasket(): void //очистка корзины;  
-getTotalPrice(): number //получение стоимости всех товаров в корзине;  
-getCount(): number //получение количества товаров в корзине;  
-hasItemBasket(id: string): boolean //проверка наличия товара в корзине по его id, полученного в параметр метода.
+getItemsBasket(): IProduct[] — получение массива товаров, которые находятся в корзине;  
+addItemBasket(item: IProduct): void — добавление товара, который был получен в параметре, в массив корзины;  
+removeItemBasket(itemToRemove: IProduct): void — удаление товара, полученного в параметре из массива корзины;  
+clearBasket(): void — очистка корзины;  
+getTotalPrice(): number — получение стоимости всех товаров в корзине;  
+getCount(): number — получение количества товаров в корзине;  
+hasItemBasket(id: string): boolean — проверка наличия товара в корзине по его id, полученного в параметр метода.
 
 Класс покупатель Buyer  
 данные покупателя, которые тот должен указать при оформлении заказа  
@@ -175,10 +175,10 @@ dataBuyer: IBuyer
 
 методы
 
-setData(data: Partial<IBuyer>): void //сохранение данных в модели  
-getData(): IBuyer //получение всех данных покупателя  
-clearData(): void //очистка данных покупателя  
-validateBuyer(): FormErrors //валидация данных
+setData(data: Partial<IBuyer>): void — сохранение данных в модели  
+getData(): IBuyer — получение всех данных покупателя  
+clearData(): void — очистка данных покупателя  
+validateBuyer(): FormErrors — валидация данных
 
 ###### Слой коммуникации
 
@@ -195,7 +195,7 @@ api: IApi
 
 методы
 
-getProducts(): Promise<IProduct[]> //get запрос на эндпоинт /product/ и возвращает массив товаров  
-postOrder(order: IOrder): Promise<IOrderResult> // post запрос на эндпоинт /order/ и передаёт данные, полученные в параметрах метода
+getProducts(): Promise<IProduct[]> — get запрос на эндпоинт /product/ и возвращает массив товаров  
+postOrder(order: IOrder): Promise<IOrderResult> — post запрос на эндпоинт /order/ и передаёт данные, полученные в параметрах метода
 
 https://github.com/mariapnfv/weblarek
