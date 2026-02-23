@@ -6,7 +6,6 @@ export interface IApi {
 }
 
 //Интерфейс данных товаров
-
 export interface IProduct {
     id: string; // Уникальный идентификатор товара
     title: string; // Название товара
@@ -17,7 +16,6 @@ export interface IProduct {
 }
 
 //Интерфейс данных покупателя
-
 export type TPayment = 'card' | 'cash' | '';
 export interface IBuyer {
     payment: TPayment; // Способ оплаты
@@ -26,13 +24,14 @@ export interface IBuyer {
     phone: string; // Телефон 
 }
 
+//Интерфейс данных заказа
 export interface IOrder {
-    payment: TPayment;    // Способ оплаты 
-    address: string;    // Адрес доставки
-    email: string;      // Электронная почта покупателя
-    phone: string;      // Телефон покупателя
-    total: number;      // Финальная сумма заказа
-    items: string[];    // Массив ID выбранных товаров (строковые идентификаторы)
+    payment: TPayment; // Способ оплаты 
+    address: string; // Адрес доставки
+    email: string; // Электронная почта покупателя
+    phone: string; // Телефон покупателя
+    total: number; // Финальная сумма заказа
+    items: string[]; // Массив ID выбранных товаров (строковые идентификаторы)
 }
 
 export type IOrderData = IOrder;
