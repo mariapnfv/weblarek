@@ -110,93 +110,92 @@ Presenter - презентер содержит основную логику п
 
 Интерфейс данных товаров
 
-interface IProduct {
-id: string; // Уникальный идентификатор товара
-title: string; // Название товара
-image: string; // URL изображения товара
-description: string; // Описание товара
-category: string; // Категория товара
-price: number | null; // Цена товара, null – бесценный
+interface IProduct {  
+ id: string; — Уникальный идентификатор товара
+ title: string; — Название товара  
+ image: string; — URL изображения товара  
+ description: string; — Описание товара  
+ category: string; — Категория товара  
+ price: number | null; — Цена товара, null – бесценный  
 }
 
 Интерфейс данных покупателя
 
-interface IBuyer {
-payment: TPayment; // Способ оплаты
-address: string; // Адрес доставки
-email: string; // Электронная почта
-phone: string; // Телефон
+interface IBuyer {  
+payment: TPayment; // Способ оплаты  
+address: string; // Адрес доставки  
+email: string; // Электронная почта  
+phone: string; // Телефон  
 }
 
 ###### Модели данных
 
-Класс каталог товаров Catalog
-хранение товаров, которые можно купить в приложении
+Класс каталог товаров Catalog  
+хранение товаров, которые можно купить в приложении  
 class Catalog
 
-constructor() {
-this.items = [];
+constructor() {  
+this.items = [];  
 }
 
-поля класса
-items: IProduct[]
+поля класса  
+items: IProduct[]  
 selectedItem: IProduct | null
 
-методы
-setItems(items: IProduct[]): void //сохранение массива товаров
-getItems(): IProduct[] //получение массива товаров
-getItemById(id: string): IProduct | undefined //получение одного товара по его id
-setPreview(item: IProduct): void //сохранение товара для подробного отображения
+методы  
+setItems(items: IProduct[]): void //сохранение массива товаров  
+getItems(): IProduct[] //получение массива товаров  
+getItemById(id: string): IProduct | undefined //получение одного товара по его id  
+setPreview(item: IProduct): void //сохранение товара для подробного отображения  
 setPreview(): IProduct | null //получение товара для подробного отображения
 
-Класс корзина Basket
-хранение товаров, которые пользователь выбрал для покупки
+Класс корзина Basket  
+хранение товаров, которые пользователь выбрал для покупки  
 class Basket
 
-поля класса
+поля класса  
 itemsBasket: IProduct[]
 
 методы
 
-getItemsBasket(): IProduct[] //получение массива товаров, которые находятся в корзине;
-addItemBasket(item: IProduct): void //добавление товара, который был получен в параметре, в массив корзины;
-removeItemBasket(itemToRemove: IProduct): void //удаление товара, полученного в параметре из массива корзины;
-clearBasket(): void //очистка корзины;
-getTotalPrice(): number //получение стоимости всех товаров в корзине;
-getCount(): number //получение количества товаров в корзине;
+getItemsBasket(): IProduct[] //получение массива товаров, которые находятся в корзине;  
+addItemBasket(item: IProduct): void //добавление товара, который был получен в параметре, в массив корзины;  
+removeItemBasket(itemToRemove: IProduct): void //удаление товара, полученного в параметре из массива корзины;  
+clearBasket(): void //очистка корзины;  
+getTotalPrice(): number //получение стоимости всех товаров в корзине;  
+getCount(): number //получение количества товаров в корзине;  
 hasItemBasket(id: string): boolean //проверка наличия товара в корзине по его id, полученного в параметр метода.
 
-Класс покупатель Buyer
-данные покупателя, которые тот должен указать при оформлении заказа
+Класс покупатель Buyer  
+данные покупателя, которые тот должен указать при оформлении заказа  
 class Buyer
 
-поля класса
+поля класса  
 dataBuyer: IBuyer
 
 методы
 
-setData(data: Partial<IBuyer>): void //сохранение данных в модели
-getData(): IBuyer //получение всех данных покупателя
-clearData(): void //очистка данных покупателя
+setData(data: Partial<IBuyer>): void //сохранение данных в модели  
+getData(): IBuyer //получение всех данных покупателя  
+clearData(): void //очистка данных покупателя  
 validateBuyer(): FormErrors //валидация данных
 
 ###### Слой коммуникации
 
-Класс Communication
-Использует композицию, чтобы выполнить запрос на сервер с помощью метода get класса Api и получает с сервера объект с массивом товаров.
+Класс Communication  
+Использует композицию, чтобы выполнить запрос на сервер с помощью метода get класса Api и получает с сервера объект с массивом товаров.  
 class Communication
 
-constructor(api: IApi) {
-this.api = api;
+constructor(api: IApi) {  
+this.api = api;  
 }
 
-поля класса
+поля класса  
 api: IApi
 
 методы
 
-    getProducts(): Promise<IProduct[]> //get запрос на эндпоинт /product/ и возвращает массив товаров
-    postOrder(order: IOrder): Promise<IOrderResult> // post запрос на эндпоинт /order/ и передаёт данные, полученные в параметрах метода
-
+getProducts(): Promise<IProduct[]> //get запрос на эндпоинт /product/ и возвращает массив товаров  
+postOrder(order: IOrder): Promise<IOrderResult> // post запрос на эндпоинт /order/ и передаёт данные, полученные в параметрах метода
 
 https://github.com/mariapnfv/weblarek
