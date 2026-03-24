@@ -8,7 +8,6 @@ type IModalData = { content: HTMLElement }
 export class Modal extends Component<IModalData> {
 	protected modalElement: HTMLElement;
 	protected closeButton: HTMLButtonElement;
-	public isActive: boolean = false;
 
 	constructor(protected container: HTMLElement, protected events: IEvents) {
 		super(container);
@@ -27,15 +26,9 @@ export class Modal extends Component<IModalData> {
 	}
 	closeModal() {
 		this.container.classList.remove('modal_active');
-		document.body.style.overflow = '';
-		this.events.emit('modal:close');
-		this.isActive = false;
 	}
 	openModal() {
 		this.container.classList.add('modal_active');
-		document.body.style.overflow = 'hidden';
-		this.events.emit('modal:open');
-		this.isActive = true;
 	}
 
 	set content(item: HTMLElement) {
@@ -43,9 +36,7 @@ export class Modal extends Component<IModalData> {
 	}
 
 	render(data?: IModalData): HTMLElement {
-		if (data?.content) {
-			this.content = data.content;
-		}
+		super.render(data);
 		this.openModal();
 		return this.container;
 	}

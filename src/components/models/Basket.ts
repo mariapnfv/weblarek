@@ -33,7 +33,7 @@ export class Basket {
 
   // Получение стоимости всех товаров
   getTotalPrice(): number {
-    return this.itemsBasket.reduce((total, item) => total +  (item.price || 0), 0);
+    return this.itemsBasket.reduce((total, item) => total + (item.price || 0), 0);
   }
 
   // Получение количества товаров

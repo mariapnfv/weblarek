@@ -1,26 +1,27 @@
-import { IEvents } from '../base/Events';
 import { ensureElement } from '../../utils/utils';
-import { Card } from '../view/Card';
+import { Card } from './Card';
 import { IProduct } from "../../types/index";
 import { categoryMap } from "../../utils/constants";
 
+interface ICardActions {
+    onClick: (event: MouseEvent) => void;
+}
 export type TCardCatalog = Pick<IProduct, 'image' | 'category'>;
-export class cardCatalog extends Card<TCardCatalog> {
+export class CardCatalog extends Card<TCardCatalog> {
     protected imageCard: HTMLImageElement;
     protected categoryCard: HTMLElement;
-    protected item!: IProduct;
 
-    constructor(protected container: HTMLElement, protected events: IEvents) {
-        super(container, events);
+
+    constructor(container: HTMLElement, actions?: ICardActions) {
+        super(container);
         this.imageCard = ensureElement<HTMLImageElement>('.card__image', this.container);
         this.categoryCard = ensureElement<HTMLElement>('.card__category', this.container);
-        this.container.addEventListener('click', () => {
-            this.events.emit('card:selected', this.item);
-        });
+        if (actions?.onClick) {
+            this.container.addEventListener('click', actions.onClick);
+        }
     }
 
     render(data: Partial<IProduct> & TCardCatalog): HTMLElement {
-        this.item = data as IProduct;
         return super.render(data);
     }
 

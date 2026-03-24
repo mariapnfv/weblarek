@@ -1,12 +1,12 @@
 import { IOrder } from '../../types';
 import { ensureElement } from '../../utils/utils';
-import { Form } from '../view/Form';
+import { Form } from './Form';
 import { IEvents } from '../base/Events';
 interface IOrderFormView extends Partial<IOrder> {
   valid: boolean;
   errors: string[];
 }
-export class orderForm extends Form<IOrderFormView> {
+export class OrderForm extends Form<IOrderFormView> {
   protected cardButton: HTMLButtonElement;
   protected cashButton: HTMLButtonElement;
   protected addressInput: HTMLInputElement;
@@ -17,12 +17,10 @@ export class orderForm extends Form<IOrderFormView> {
     this.cashButton = ensureElement<HTMLButtonElement>('button[name="cash"]', this.container);
     this.addressInput = ensureElement<HTMLInputElement>('input[name="address"]', this.container);
     this.cardButton.addEventListener('click', () => {
-      this.payment = 'card';
       this.events.emit('payment:change', { method: 'card' });
     });
 
     this.cashButton.addEventListener('click', () => {
-      this.payment = 'cash';
       this.events.emit('payment:change', { method: 'cash' });
     });
     this.addressInput.addEventListener('input', (e: Event) => {
@@ -31,16 +29,8 @@ export class orderForm extends Form<IOrderFormView> {
     });
   }
   set payment(value: string) {
-    if (value === 'cash') {
-      this.cashButton.classList.add('button_alt-active');
-      this.cardButton.classList.remove('button_alt-active');
-    } else if (value === 'card') {
-      this.cardButton.classList.add('button_alt-active');
-      this.cashButton.classList.remove('button_alt-active');
-    } else {
-      this.cardButton.classList.remove('button_alt-active');
-      this.cashButton.classList.remove('button_alt-active');
-    }
+    this.cashButton.classList.toggle('button_alt-active', value === 'cash');
+    this.cardButton.classList.toggle('button_alt-active', value === 'card');
   }
 
   set address(value: string) {

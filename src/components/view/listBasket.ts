@@ -6,7 +6,7 @@ interface IBasketView {
     finalSum: number;
 }
 
-export class listBasket extends Component<IBasketView> {
+export class ListBasket extends Component<IBasketView> {
     protected basketList: HTMLElement;
     protected basketPrice: HTMLElement;
     protected basketButton: HTMLButtonElement;

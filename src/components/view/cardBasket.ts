@@ -1,31 +1,26 @@
-import { IEvents } from '../base/Events';
 import { ensureElement } from '../../utils/utils';
-import { Card } from '../view/Card';
+import { Card } from './Card';
 import { IProduct } from "../../types/index";
 interface ICardBasket extends IProduct {
   index: number;
 }
-export class cardBasket extends Card<ICardBasket> {
+interface ICardBasketActions {
+  onClick: (event: MouseEvent) => void;
+}
+
+export class CardBasket extends Card<ICardBasket> {
   protected indexItem: HTMLElement;
   protected deleteItem: HTMLButtonElement;
-  protected id?: string;
 
-  constructor(protected container: HTMLElement, protected events: IEvents) {
-    super(container, events);
+  constructor(protected container: HTMLElement, actions?: ICardBasketActions) {
+    super(container);
     this.indexItem = ensureElement<HTMLElement>('.basket__item-index', this.container);
     this.deleteItem = ensureElement<HTMLButtonElement>('.card__button', this.container);
-    this.deleteItem.addEventListener('click', () => {
-      this.events.emit('card:remove', { id: this.id });
-    });
+    if (actions?.onClick) {
+      this.deleteItem.addEventListener('click', actions.onClick);
+    }
   }
   render(data: Partial<ICardBasket>): HTMLElement {
-    if (data.id) {
-      this.id = data.id;
-    }
     return super.render(data);
   }
-  set index(value: number) {
-    this.indexItem.textContent = String(value);
-  }
-
 }

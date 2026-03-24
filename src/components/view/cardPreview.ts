@@ -1,6 +1,5 @@
-import { IEvents } from '../base/Events';
 import { ensureElement } from '../../utils/utils';
-import { Card } from '../view/Card';
+import { Card } from './Card';
 import { IProduct } from "../../types/index";
 import { categoryMap } from "../../utils/constants";
 
@@ -9,31 +8,29 @@ interface ICardPreview extends IProduct {
     valid?: boolean;
     index?: number;
 }
-export class cardPreview extends Card<ICardPreview> {
+interface ICardPreviewActions {
+    onClick: () => void;
+}
+
+export class CardPreview extends Card<ICardPreview> {
     protected imageCard: HTMLImageElement;
     protected categoryCard: HTMLElement;
     protected textCard: HTMLElement;
     protected buttonCard: HTMLButtonElement;
-    protected _data!: IProduct;
 
-    constructor(protected container: HTMLElement, protected events: IEvents) {
-        super(container, events);
+    constructor(protected container: HTMLElement, actions?: ICardPreviewActions) {
+        super(container);
         this.imageCard = ensureElement<HTMLImageElement>('.card__image', this.container);
         this.categoryCard = ensureElement<HTMLElement>('.card__category', this.container);
         this.textCard = ensureElement<HTMLElement>('.card__text', this.container);
         this.buttonCard = ensureElement<HTMLButtonElement>('.card__button', this.container);
-        this.buttonCard.addEventListener('click', () => {
-            if (this._data) {
-                this.events.emit('card:toggle', this._data);
-            }
-        });
+        if (actions?.onClick) {
+            this.buttonCard.addEventListener('click', actions.onClick);
+        }
 
     }
     set image(value: string) {
-        this.imageCard.src = value;
-        if (this._data?.title) {
-            this.imageCard.alt = this._data.title;
-        }
+        this.setImage(this.imageCard, value, this.cardTitle.textContent);
     }
 
     set category(value: string) {
@@ -54,9 +51,6 @@ export class cardPreview extends Card<ICardPreview> {
     }
 
     render(data?: Partial<ICardPreview>): HTMLElement {
-        if (data) {
-            this._data = Object.assign(this._data ?? {}, data);
-        }
         return super.render(data);
     }
 }

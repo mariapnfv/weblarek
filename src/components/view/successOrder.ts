@@ -6,7 +6,7 @@ type IFinalSum = {
   finalSum: number;
 }
 
-export class successOrder extends Component<IFinalSum> {
+export class SuccessOrder extends Component<IFinalSum> {
   protected successOrderSum: HTMLElement;
   protected successOrderClose: HTMLButtonElement;
 

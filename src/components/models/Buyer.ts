@@ -11,12 +11,12 @@ export class Buyer {
         email: ''
     }
 
-     constructor(protected events: IEvents) {  }
-    
+    constructor(protected events: IEvents) { }
+
     //сохранение данных в модели
     setData(data: Partial<IBuyer>): void {
         this.dataBuyer = { ...this.dataBuyer, ...data };
-        this.events.emit('dataBuyer:change', this.dataBuyer);
+        this.events.emit('dataBuyer:change');
     }
     //получение всех данных покупателя
     getData(): IBuyer {
@@ -30,7 +30,7 @@ export class Buyer {
             phone: '',
             email: ''
         };
-        this.events.emit('dataBuyer:change', this.dataBuyer);
+        this.events.emit('dataBuyer:change');
     }
 
     //валидация данных

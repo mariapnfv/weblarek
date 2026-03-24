@@ -15,7 +15,12 @@ export class Form<T> extends Component<T> {
       this.events.emit(`${this.container.name}:submit`);
     });
     this.container.addEventListener('input', (e: Event) => {
-      this.events.emit(`${this.container.name}:change`,);
+      const target = e.target as HTMLInputElement;
+      const field = target.name;
+      const value = target.value;
+      this.events.emit(`${this.container.name}.${field}:change`, {
+        value
+      });
     });
   }
   set error(value: string) {
